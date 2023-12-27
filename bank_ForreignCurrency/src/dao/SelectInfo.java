@@ -11,37 +11,7 @@ import util.DBManager;
 // DB에서 정보를 조회(select)할 수 있는 클래스
 public class SelectInfo {
 	
-//	[[보유 달러(USD) 조회]] => [??]에 사용
-	public static TradingVo amountUSD() {
-		String sql = "SELECT SUM(amount_krw) AS amount_krw, SUM(amount_usd) AS amount_usd\r\n"
-				+ "    FROM trading_income";
-		
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		Connection conn = null;
-		
-		TradingVo amountUSD = new TradingVo();
-		
-		try {
-			conn = DBManager.getConnection();		// DB 연결
-			pstmt = conn.prepareStatement(sql);		// 쿼리문 실행
-			rs = pstmt.executeQuery();				// 쿼리문 결과 처리
-			
-			// 보유한 달러가 null이면 0.0으로 표시, 아니면 그대로 조회
-			while(rs.next()) {
-				if (rs.getDouble("amount_usd") == 0) {
-					System.out.println( 0.0 );
-				} else {
-					System.out.println(rs.getDouble("amount_usd"));
-				}				
-			}
 
-		} catch(Exception e) {
-			System.out.println("예외 발생시 처리할 코드: 쿼리문 조회(보유 금액)");
-		}
-		DBManager.close(conn, pstmt, rs);	// DB 닫기
-		return amountUSD;
-	}
 	
 	
 //	[[Exchanges 테이블 조회(select)]] : 모든 정보 조회
@@ -89,44 +59,7 @@ public class SelectInfo {
 		DBManager.close(conn, pstmt, rs);		// DB 닫기
 	}
 	
-//	[[Exchanges 테이블 조회(select)]] : 현재(sysdate) 환율 조회
-	public static ExchangesVo exchangesInfo() {
-		String sql = "SELECT TO_CHAR(ex_date, 'YYYY-MM-DD') AS ex_date\r\n"
-				+ "        , base_rate, purchase_krw, selling_krw\r\n"
-				+ "    FROM exchanges \r\n"
-				+ "    WHERE TO_CHAR(ex_date, 'YYYY-MM-DD') \r\n"
-				+ "        IN TO_CHAR(SYSDATE, 'YYYY-MM-DD')";
-		
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		Connection conn = null;
-		
-		ExchangesVo todayCurrency = new ExchangesVo();;
-		
-		try {
-			conn = DBManager.getConnection();		// DB 연결
-			pstmt = conn.prepareStatement(sql);		// 쿼리문 실행
-			rs = pstmt.executeQuery();				// 쿼리문 결과 처리
-			
-			while(rs.next()) {
-//				String ex_date = rs.getString("ex_date");
-//				String currency_name = rs.getString("currency_name");
-//				double base_rate = rs.getDouble("base_rate");
-//				double purchase_krw = rs.getDouble("purchase_krw");
-//				double selling_krw = rs.getDouble("selling_krw");
-				
-				System.out.println(" [달러 환율]");
-				System.out.println(" 날짜\t\t환율\t\t달러 살 때\t\t달러 팔 때");
-				System.out.println( " " +rs.getString("ex_date") + "\t" + rs.getDouble("base_rate") + "\t\t" 
-								+ rs.getDouble("purchase_krw") + "(원)\t\t" + rs.getDouble("selling_krw") + "(원)\t");
-			}
-			
-		} catch(Exception e) {
-			System.out.println("예외 발생시 처리할 코드: 쿼리문 조회(오늘 환율)");
-		}
-		DBManager.close(conn, pstmt, rs);	// DB 닫기
-		return todayCurrency;
-	}
+
 	
 	
 	// 거래 기록에 필요한 변수 선언

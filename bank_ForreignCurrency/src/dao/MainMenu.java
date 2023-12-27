@@ -5,10 +5,11 @@ import java.util.Scanner;
 //1. 프로그램 실행시, 메인메뉴 화면을 조회
 //유스케이스 ID: UC-U01
 public class MainMenu {
+	public String select;
 	
 	// 메소드
 	// 메인 메뉴 화면
-	public static String mainMenu(Scanner sc) {
+	public String mainMenu(Scanner sc) {
 		
 		String select = null;
 		
@@ -40,18 +41,17 @@ public class MainMenu {
 				break;
 		}
 		return select;
-		
 	}
 	
 	// 잘 못 입력된 경우
-	public static void wrong(Scanner sc) {
+	public void wrong(Scanner sc) {
 		String select = null;
 		System.out.println("\n<<잘못된 값을 입력하였습니다. 다시 입력해 주세요.>>");
 //		return select;
 	}
 	
 	// 프로그램 종료
-	public static void programEnd(Scanner sc) {
+	public void programEnd(Scanner sc) {
 		String select = null;
 		
 			System.out.println("=================================================");

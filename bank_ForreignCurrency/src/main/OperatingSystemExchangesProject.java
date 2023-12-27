@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import dao.MainMenu;
-import dao.SelectInfo;
+import dao.Test;
 import dao.Trading;
 import dto.AreaVo;
 import dto.CalculateVo;
@@ -36,12 +36,13 @@ public class OperatingSystemExchangesProject {
 		
 		// 1. 메인 메뉴 화면 조회 ==============================================
 		// 1. 프로그램 실행 - 메인 메뉴 ★★★★★★
-//		select = main.mainMenu(sc);
+		select = main.mainMenu(sc);
 		
 		// 2. 거래 시작 화면 조회 ==============================================
 //		trading.startTrading(sc);
 		
 		// 2-1. 금액(원화) 충전 화면 조회
+//		trading.amountKRW();
 //		trading.chargeAmount(sc);
 		
 		// 현재 환율 정보 조회(sysdate)
@@ -52,11 +53,10 @@ public class OperatingSystemExchangesProject {
 //		};
 		
 		// 랜덤 환율 조회
-		trading.checkTodayDate();
-//		selectInfo.randomRateInfo();
+//		trading.randomRateInfo();
 		
-		// 랜덤 환율 삽입
-//		trading.randomExchanges();		// 오류 ★★★★★★★★★★★
+		// 조회한 random 환율을 삽입
+//		trading.checkTodayDate();
 		
 		// 2-2. 원화/달러 거래 ==============================================
 //		trading.trading(sc);
@@ -65,7 +65,7 @@ public class OperatingSystemExchangesProject {
 //		selectInfo.exchangesInfo();
 		
 		// 보유 금액(달러, 원화) 조회 => 금액충전, 원화/달러 거래, 거래 기록 조회에 사용
-//		selectInfo.amount();
+//		trading.amount();
 		
 		
 		// 3. 거래 기록 조회 ==============================================
